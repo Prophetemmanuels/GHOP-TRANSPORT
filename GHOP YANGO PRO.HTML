@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Life OS V5 - Autonomous AI Driver System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #050816;
+    color: #eaeaea;
+}
+
+header {
+    background: #0b1a3a;
+    padding: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.container {
+    padding: 15px;
+    max-width: 980px;
+    margin: auto;
+}
+
+.card {
+    background: #111c33;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+h3 { color: #6aa6ff; margin-top: 0; }
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #2f6fff;
+    color: white;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 8px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #243a66;
+    border-radius: 20px;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🚗 LIFE OS V5 - AUTONOMOUS AI DRIVER SYSTEM (LUSAKA)
+</header>
+
+<div class="container">
+
+<!-- AI CORE -->
+<div class="card">
+<h3>🧠 Autonomous AI Decision Engine</h3>
+<p id="decision"></p>
+<div class="badge" id="mode"></div>
+<p id="nextMove"></p>
+</div>
+
+<!-- LEARNING SYSTEM -->
+<div class="card">
+<h3>📊 Learning Engine (Adaptive Intelligence)</h3>
+<p id="learning"></p>
+</div>
+
+<!-- PREDICTION ENGINE -->
+<div class="card">
+<h3>📈 Earnings Forecast System</h3>
+<p id="forecast"></p>
+</div>
+
+<!-- HOTSPOT SIMULATION -->
+<div class="card">
+<h3>📍 Lusaka AI Demand Map</h3>
+<p id="map"></p>
+</div>
+
+<!-- PROFIT ENGINE -->
+<div class="card">
+<h3>💰 Real Profit Calculator</h3>
+<p id="profit"></p>
+</div>
+
+<!-- INCOME TRACKER -->
+<div class="card">
+<h3>📊 Income Tracker</h3>
+<input type="number" id="income" placeholder="Enter today's earnings (K)">
+<button onclick="saveIncome()">Save Income</button>
+
+<p id="total"></p>
+<p id="progress"></p>
+</div>
+
+<!-- AUTO BRAIN CONTROL -->
+<div class="card">
+<h3>🚨 Auto AI Control System</h3>
+<button onclick="autoDecision()">Run AI Decision Cycle</button>
+<p id="auto"></p>
+</div>
+
+</div>
+
+<script>
+
+// ---------------- TIME ----------------
+let hour = new Date().getHours();
+
+// ---------------- HISTORY LEARNING ----------------
+let history = JSON.parse(localStorage.getItem("history") || "[]");
+
+// ---------------- DEFAULT MODEL ----------------
+let decision = "";
+let mode = "";
+let nextMove = "";
+let map = "";
+let forecast = 0;
+let fuel = 0;
+let scoreBoost = 0;
+
+// ---------------- AI LEARNING LOGIC ----------------
+let avg = 0;
+if (history.length > 0) {
+    avg = history.reduce((a,b)=>a+b,0) / history.length;
+}
+
+// ---------------- SMART ADAPTATION ----------------
+let multiplier = 1;
+
+if (avg > 300) {
+    multiplier = 1.2; // strong performer
+} else if (avg < 150) {
+    multiplier = 0.9; // weak performance
+}
+
+// ---------------- CORE AI DECISION ----------------
+
+// MORNING
+if (hour >= 5 && hour < 10) {
+    decision = "🚀 AUTONOMOUS GO: Morning Peak Detected";
+    mode = "HIGH PROFIT MODE";
+    nextMove = "Move to CBD or bus terminals immediately";
+    map = "CBD • Cairo Road • Kamwala • Intercity";
+    forecast = Math.round(280 * multiplier);
+    fuel = 60;
+    scoreBoost = 95;
+}
+
+// MIDDAY
+else if (hour >= 10 && hour < 15) {
+    decision = "⏸ AI HOLD: Low Demand Zone";
+    mode = "EFFICIENCY MODE";
+    nextMove = "Wait or reposition near malls";
+    map = "EastPark • Manda Hill • Hospitals";
+    forecast = Math.round(90 * multiplier);
+    fuel = 40;
+    scoreBoost = 60;
+}
+
+// EVENING
+else if (hour >= 15 && hour < 20) {
+    decision = "🚀 AUTONOMOUS GO: Evening Rush";
+    mode = "HIGH PROFIT MODE";
+    nextMove = "Go to town for homebound passengers";
+    map = "Town → Woodlands • Chelston • Chalala";
+    forecast = Math.round(320 * multiplier);
+    fuel = 70;
+    scoreBoost = 98;
+}
+
+// NIGHT
+else {
+    decision = "🌙 AUTONOMOUS REST MODE";
+    mode = "SAFETY MODE";
+    nextMove = "Only accept high-value rides or rest";
+    map = "Airport route only";
+    forecast = Math.round(60 * multiplier);
+    fuel = 20;
+    scoreBoost = 40;
+}
+
+// ---------------- DISPLAY ----------------
+document.getElementById("decision").innerText = decision;
+document.getElementById("mode").innerText = mode;
+document.getElementById("nextMove").innerText = nextMove;
+document.getElementById("map").innerText = map;
+
+document.getElementById("forecast").innerText =
+"Predicted Earnings: K" + forecast + " | Fuel Cost: K" + fuel + " | Net: K" + (forecast - fuel);
+
+// ---------------- LEARNING ENGINE ----------------
+document.getElementById("learning").innerText =
+"AI Learning Status: Based on " + history.length + " sessions | Avg earnings: K" + avg.toFixed(1) +
+" | Adjustment multiplier: " + multiplier;
+
+// ---------------- INCOME ----------------
+function saveIncome() {
+    let val = Number(document.getElementById("income").value);
+
+    let total = localStorage.getItem("income") || 0;
+    total = Number(total) + val;
+
+    localStorage.setItem("income", total);
+
+    history.push(val);
+    localStorage.setItem("history", JSON.stringify(history));
+
+    update();
+}
+
+function update() {
+    let total = Number(localStorage.getItem("income") || 0);
+
+    document.getElementById("total").innerText =
+    "Weekly Total: K " + total;
+
+    let progress = (total / 3000) * 100;
+    if (progress > 100) progress = 100;
+
+    document.getElementById("progress").innerText =
+    "Goal Progress: " + progress.toFixed(1) + "%";
+}
+update();
+
+// ---------------- AUTO AI CYCLE ----------------
+function autoDecision() {
+    document.getElementById("auto").innerText =
+    "AI executed decision: " + decision + " → " + nextMove;
+}
+
+</script>
+
+</body>
+</html>
