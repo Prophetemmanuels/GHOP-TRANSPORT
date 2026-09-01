@@ -154,7 +154,14 @@ export const Footer: React.FC = () => {
         {/* Bottom copyright & legal */}
         <div className="pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-500 gap-4">
           <p>© {new Date().getFullYear()} GHOP Photography & GHOP Makeup Zambia (@GHOPzambia). All Global Commercial Rights Reserved.</p>
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <a 
+              href="/ghop-zambia-github-ready.zip" 
+              download="ghop-zambia-github-ready.zip"
+              className="text-[#d4af37] hover:text-[#f3e5ab] font-bold font-mono flex items-center gap-1 hover:underline"
+            >
+              📦 Download GitHub Ready ZIP
+            </a>
             <a href="https://web.facebook.com/GHOPzambia" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:underline">Facebook: @GHOPzambia</a>
             <a href="#" className="hover:text-neutral-300">Privacy Protocol</a>
             <a href="#" className="hover:text-neutral-300">Terms of Production</a>

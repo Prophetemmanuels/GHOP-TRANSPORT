@@ -388,16 +388,15 @@ export const SelfAdvertisingEngine: React.FC = () => {
               </div>
             </div>
 
-            <button
-              onClick={() => {
-                soundManager.playShutterSound();
-                alert('Downloading 2025 GHOP Zambia Royal Bridal Lookbook & Media Kit (.PDF)...');
-              }}
+            <a
+              href="/ghop-zambia-github-ready.zip"
+              download="ghop-zambia-github-ready.zip"
+              onClick={() => soundManager.playShutterSound()}
               className="w-full py-3 rounded-xl bg-[#1a1c25] hover:bg-[#d4af37] hover:text-black text-[#d4af37] font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 border border-[#d4af37]/40 cursor-pointer"
             >
               <Download className="w-4 h-4" />
-              <span>Download 2025 Official Lookbook (.PDF)</span>
-            </button>
+              <span>Download GitHub Ready Repo (.ZIP)</span>
+            </a>
           </div>
 
         </div>
